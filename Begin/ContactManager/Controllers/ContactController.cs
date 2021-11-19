@@ -16,9 +16,17 @@ namespace ContactManager.Controllers
             this.contactRepository = new ContactRepository();
         }
 
+        [HttpGet]
         public Contact[] Get()
         {
             return contactRepository.GetAllContacts();
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromForm]Contact contact)
+        {
+            this.contactRepository.SaveContact(contact);
+            return Created("", contact);
         }
     }
 }
